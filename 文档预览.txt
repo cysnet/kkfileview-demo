@@ -1,0 +1,17 @@
+
+docker run --name=kkfileview -d -p  8012:8012 keking/kkfileview
+
+docker run --name=kkfileview -e KK_CACHE_ENABLED=false -d -p  8012:8012 keking/kkfileview
+
+docker run --name=kkfileview -v  D:/docker/kkfileview/:/opt/kkFileView-4.1.0-SNAPSHOT/config -d -p  8012:8012 keking/kkfileview
+
+
+配置文件
+/opt/kkFileView-4.1.0-SNAPSHOT/config
+
+
+
+http://192.168.0.107:1888/
+
+
+http://192.168.0.107:8012/index

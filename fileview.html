@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="./base64.min.js"></script>
+    <script type="text/javascript" src="./jquery-1.8.0.js"></script>
+
+    <script>
+        var kkServer = "http://127.0.0.1:8012/";
+        var fileServer = "http://192.168.0.103:1888";
+        $(function() {
+            $.get(fileServer, function(result) {
+                $("#hiddenDiv").html(result)
+
+                setLinks(getLinkHrefs())
+            });
+        })
+
+        //获取所有需预览的文件
+        function getLinkHrefs(htmlValue) {
+            var hrefs = []
+            $('a').each(function() {
+                var hrefValue = decodeURIComponent($(this).attr('href'))
+                hrefs.push(hrefValue)
+            })
+            return hrefs
+        }
+
+        //显示预览链接
+        function setLinks(hrefs) {
+            htmlResult = ''
+            hrefs.forEach(function(v, i) {
+                href = kkServer + 'onlinePreview?url=' + encodeURIComponent(Base64.encode(fileServer + v)) + '&watermarkTxt=' + encodeURIComponent('用友U9C')
+                htmlResult += `<A HREF="${href}">${v}</A>`
+                htmlResult += "<br/>"
+            })
+
+            $("#showDiv").html(htmlResult)
+        }
+    </script>
+</head>
+
+<body>
+    <h1>kkfileview demo</h1>
+    <div id="hiddenDiv" hidden></div>
+    <div id="showDiv"></div>
+</body>
+
+</html>
